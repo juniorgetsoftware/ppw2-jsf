@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Projeto de testes</title>
+</h:head>
+<h:body>
+	<h1>Projeto de testes</h1>
+
+	<h1>Rótulo</h1>
+	<h:outputLabel value="Meu rótulo" />
+
+	<h1>Campo de texto</h1>
+	<h:outputLabel value="Nome" />
+	<h:inputText value="" />
+	<br />
+	<br />
+	<h:outputLabel value="Campo com texto" />
+	<h:inputText value="Com valor definido" />
+
+	<h1>Campo de senha</h1>
+	<h:outputLabel value="Senha" />
+	<h:inputSecret value="" />
+
+	<h1>Campo de texto longo</h1>
+	<h:outputLabel value="Observação" />
+	<h:inputTextarea value="" />
+
+	<h1>Botão</h1>
+	<h:commandButton value="Meu botão" />
+
+	<h1>Links</h1>
+	<h:link value="Link de navegação"></h:link>
+
+	<h:form>
+		<h:commandLink value="Enviar formulário" />
+	</h:form>
+
+	<h1>Tabela</h1>
+	<h:dataTable>
+	</h:dataTable>
+
+	<h1>Seleção única</h1>
+	<h:outputLabel value="Sexo" />
+	<h:selectOneRadio>
+		<f:selectItem itemLabel="Masculino" itemValue="M" />
+		<f:selectItem itemLabel="Feminino" itemValue="F" />
+	</h:selectOneRadio>
+
+	<h1>Múltipla seleção</h1>
+	<h:outputLabel value="Jogos" />
+	<h:selectManyCheckbox>
+		<f:selectItem itemLabel="Super Mário" itemValue="1" />
+		<f:selectItem itemLabel="Castlevania" itemValue="2" />
+		<f:selectItem itemLabel="Bomberman" itemValue="3" />
+		<f:selectItem itemLabel="Mortal Kombat" itemValue="4" />
+		<f:selectItem itemLabel="Super Metroid" itemValue="5" />
+	</h:selectManyCheckbox>
+
+	<h1>Múltipla seleção</h1>
+	<h:outputLabel value="Estado" />
+	<h:selectOneMenu>
+		<f:selectItem itemLabel="CE" itemValue="1" />
+		<f:selectItem itemLabel="BA" itemValue="2" />
+		<f:selectItem itemLabel="SP" itemValue="3" />
+		<f:selectItem itemLabel="RJ" itemValue="4" />
+		<f:selectItem itemLabel="RN" itemValue="5" />
+	</h:selectOneMenu>
+
+
+
+	<h1>Imagem</h1>
+	<h:graphicImage
+		value="https://upload.wikimedia.org/wikipedia/pt/thumb/e/e0/Castlevania_Symphony_of_the_Night_Capa.jpg/240px-Castlevania_Symphony_of_the_Night_Capa.jpg" />
+
+	<h1>Grades</h1>
+
+	<h:panelGrid columns="3">
+		<h:panelGroup>
+			11
+		</h:panelGroup>
+		<h:panelGroup>
+			12
+		</h:panelGroup>
+		<h:panelGroup>
+			13
+		</h:panelGroup>
+
+
+		<h:panelGroup>
+			21
+		</h:panelGroup>
+		<h:panelGroup>
+			22
+		</h:panelGroup>
+		<h:panelGroup>
+			23
+		</h:panelGroup>
+
+
+
+		<h:panelGroup>
+			31
+		</h:panelGroup>
+		<h:panelGroup>
+			32
+		</h:panelGroup>
+		<h:panelGroup>
+			33
+		</h:panelGroup>
+	</h:panelGrid>
+
+	<h1>Seleção em caixa</h1>
+	<h:outputLabel value="Perfil" />
+	<h:selectOneListbox>
+		<f:selectItem itemLabel="Administrador" itemValue="1" />
+		<f:selectItem itemLabel="Médico" itemValue="2" />
+		<f:selectItem itemLabel="Secretário" itemValue="5" />
+	</h:selectOneListbox>
+
+	<h1>Seleção em caixa</h1>
+	<h:outputLabel value="Permissões" />
+	<h:selectManyListbox>
+		<f:selectItem itemLabel="Cadastrar usuários" itemValue="1" />
+		<f:selectItem itemLabel="Cadastrar contas" itemValue="2" />
+		<f:selectItem itemLabel="Listar contas" itemValue="3" />
+		<f:selectItem itemLabel="Exibir dashboard" itemValue="4" />
+		<f:selectItem itemLabel="Remover usuários" itemValue="5" />
+	</h:selectManyListbox>
+
+	<h1>Seleção única em caixa</h1>
+	<h:selectBooleanCheckbox id="notificacoes" value="" />
+	<h:outputLabel for="notificacoes"
+		value="Deseja receber as atualização?" />
+
+</h:body>
+</html>
