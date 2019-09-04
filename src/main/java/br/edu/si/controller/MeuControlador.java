@@ -1,56 +1,50 @@
 package br.edu.si.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import br.edu.si.model.Cliente;
 
 @ManagedBean(name = "meuControlador")
+@ViewScoped
 public class MeuControlador {
 
-	private String nome;
-	private String logradouro;
-	private String bairro;
-	private String estado;
+	private Cliente cliente = new Cliente();
+	private static List<Cliente> clientes = new ArrayList<>();
 
 	public String[] estados() {
 		return new String[] { "CE", "SP", "RN", "RJ" };
 	}
 
 	public void cadastrar() {
-		System.out.println(nome);
-		System.out.println(logradouro);
-		System.out.println(bairro);
-		System.out.println(estado);
+		clientes.add(cliente);
+		cliente = new Cliente();
 	}
 
-	public String getNome() {
-		return nome;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public List<Cliente> clientes() {
+		return clientes;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void excluir() {
+		clientes.remove(cliente);
+		cliente = new Cliente();
 	}
 
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void editar() {
+		int index = clientes.indexOf(cliente);
+		clientes.set(index, cliente);
+		cliente = new Cliente();
 	}
 
 }

@@ -16,29 +16,90 @@
 
 		<h:panelGrid columns="1">
 
+			<h:outputLabel value="Id" />
+			<h:inputText value="#{meuControlador.cliente.id}" />
+
 			<h:outputLabel value="Nome" />
-			<h:inputText value="#{meuControlador.nome}" />
+			<h:inputText value="#{meuControlador.cliente.nome}" />
 
 			<h:outputLabel value="Logradouro" />
-			<h:inputText value="#{meuControlador.logradouro}" />
+			<h:inputText value="#{meuControlador.cliente.logradouro}" />
 
 			<h:outputLabel value="Bairro" />
-			<h:inputText value="#{meuControlador.bairro}" />
+			<h:inputText value="#{meuControlador.cliente.bairro}" />
 
 			<h:outputLabel value="Estado" />
-			<h:selectOneMenu value="#{meuControlador.estado}">
-				<f:selectItems 
-					value="#{meuControlador.estados()}"
-					var="e"
-					itemLabel="#{e}"
-					itemValue="#{e}"/>
+			<h:selectOneMenu value="#{meuControlador.cliente.estado}">
+				<f:selectItems value="#{meuControlador.estados()}" var="e"
+					itemLabel="#{e}" itemValue="#{e}" />
 			</h:selectOneMenu>
 
 			<h:commandButton 
-				action="#{meuControlador.cadastrar()}" 
+				rendered="#{meuControlador.cliente.id == null}"
+				action="#{meuControlador.cadastrar()}"
 				value="Cadastrar" />
-
+				
+			<h:commandButton 
+				rendered="#{meuControlador.cliente.id != null}"
+				action="#{meuControlador.editar()}"
+				value="Editar" />
+				
 		</h:panelGrid>
+
+		<h:dataTable 
+			var="c" 
+			value="#{meuControlador.clientes()}">
+
+			<f:facet name="header">
+				<h2>Lista de clientes</h2>
+			</f:facet>
+
+			<h:column>
+				<f:facet name="header">#</f:facet>
+				#{c.id}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{c.nome}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Logradouro</f:facet>
+				#{c.logradouro}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Bairro</f:facet>
+				#{c.bairro}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Estado</f:facet>
+				#{c.estado}
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:commandButton 
+					value="Editar" >
+					<f:setPropertyActionListener 
+						value="#{c}" 
+						target="#{meuControlador.cliente}" />
+				</h:commandButton>
+				
+				<h:commandButton 
+					action="#{meuControlador.excluir()}" 
+					value="Excluir" >
+					<f:setPropertyActionListener 
+						value="#{c}" 
+						target="#{meuControlador.cliente}" />
+				</h:commandButton>
+			</h:column>
+
+		</h:dataTable>
+
+
 	</h:form>
 
 </h:body>
