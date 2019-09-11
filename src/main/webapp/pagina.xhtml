@@ -2,102 +2,110 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>PPW</title>
 </h:head>
 
 <h:body>
-	<h:form>
+	<h:form id="form">
 
 		<h1>Cadastro de cliente</h1>
 
+		<p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
 
-		<h:panelGrid columns="1">
+			<p:outputLabel for="cliente-id" value="Id" />
+			<p:inputText id="cliente-id" value="#{meuControlador.cliente.id}"
+				required="true" requiredMessage="Campo 'Id' é obrigatório" />
 
-			<h:outputLabel value="Id" />
-			<h:inputText value="#{meuControlador.cliente.id}" />
+			<p:message for="cliente-id" />
 
-			<h:outputLabel value="Nome" />
-			<h:inputText value="#{meuControlador.cliente.nome}" />
+			<p:outputLabel for="cliente-nome" value="Nome" />
+			<p:inputText id="cliente-nome" value="#{meuControlador.cliente.nome}"
+				required="true" requiredMessage="Campo 'Nome' é obrigatório" />
+			<p:message for="cliente-nome" />
 
-			<h:outputLabel value="Logradouro" />
-			<h:inputText value="#{meuControlador.cliente.logradouro}" />
+			<p:outputLabel for="cliente-logradouro" value="Logradouro" />
+			<p:inputText id="cliente-logradouro"
+				value="#{meuControlador.cliente.logradouro}" required="true"
+				requiredMessage="Campo 'Logradouro' é obrigatório" />
+			<p:message for="cliente-logradouro" />
 
-			<h:outputLabel value="Bairro" />
-			<h:inputText value="#{meuControlador.cliente.bairro}" />
+			<p:outputLabel for="cliente-bairro" value="Bairro" />
+			<p:inputText id="cliente-bairro"
+				value="#{meuControlador.cliente.bairro}" required="true"
+				requiredMessage="Campo 'Bairro' é obrigatório" />
+			<p:message for="cliente-bairro" />
 
-			<h:outputLabel value="Estado" />
-			<h:selectOneMenu value="#{meuControlador.cliente.estado}">
+			<p:outputLabel for="cliente-estado" value="Estado" />
+			<p:selectOneMenu id="cliente-estado"
+				value="#{meuControlador.cliente.estado}" required="true"
+				requiredMessage="Campo 'Estado' é obrigatório">
+				<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 				<f:selectItems value="#{meuControlador.estados()}" var="e"
 					itemLabel="#{e}" itemValue="#{e}" />
-			</h:selectOneMenu>
+			</p:selectOneMenu>
+			<p:message for="cliente-estado" />
 
-			<h:commandButton 
-				rendered="#{meuControlador.cliente.id == null}"
-				action="#{meuControlador.cadastrar()}"
-				value="Cadastrar" />
-				
-			<h:commandButton 
-				rendered="#{meuControlador.cliente.id != null}"
-				action="#{meuControlador.editar()}"
-				value="Editar" />
-				
-		</h:panelGrid>
+			<p:commandButton rendered="#{meuControlador.cliente.id == null}"
+				action="#{meuControlador.cadastrar()}" value="Cadastrar"
+				update="form, tabela" />
 
-		<h:dataTable 
-			var="c" 
-			value="#{meuControlador.clientes()}">
+			<p:commandButton rendered="#{meuControlador.cliente.id != null}"
+				action="#{meuControlador.editar()}" value="Editar"
+				update="form, tabela" />
+
+		</p:panelGrid>
+	</h:form>
+
+
+	<h:form id="tabela">
+
+		<p:dataTable var="c" value="#{meuControlador.clientes()}"
+			rowHover="true" sortBy="#{c.nome}">
 
 			<f:facet name="header">
 				<h2>Lista de clientes</h2>
 			</f:facet>
 
-			<h:column>
-				<f:facet name="header">#</f:facet>
+			<p:column headerText="$">
 				#{c.id}
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
+			</p:column>
+
+			<p:column headerText="Nome">
 				#{c.nome}
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Logradouro</f:facet>
+			<p:column headerText="Logradouro">
 				#{c.logradouro}
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Bairro</f:facet>
+			<p:column headerText="Bairro">
 				#{c.bairro}
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Estado</f:facet>
+			<p:column headerText="Estado">
 				#{c.estado}
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Ações</f:facet>
-				<h:commandButton 
-					value="Editar" >
-					<f:setPropertyActionListener 
-						value="#{c}" 
+			<p:column headerText="Ações">
+				<p:commandButton value="Editar"
+				update="form"
+				immediate="true">
+					<f:setPropertyActionListener value="#{c}"
 						target="#{meuControlador.cliente}" />
-				</h:commandButton>
-				
-				<h:commandButton 
-					action="#{meuControlador.excluir()}" 
-					value="Excluir" >
-					<f:setPropertyActionListener 
-						value="#{c}" 
-						target="#{meuControlador.cliente}" />
-				</h:commandButton>
-			</h:column>
+				</p:commandButton>
 
-		</h:dataTable>
+				<p:commandButton action="#{meuControlador.excluir()}"
+					value="Excluir" immediate="true" update="tabela">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{meuControlador.cliente}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
 
 
 	</h:form>
