@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PPW</title>
+</h:head>
+
+<h:body>
+
+	<div class="ui-fluid">
+	
+		<h:form id="menu">
+			<p:menubar>
+				<p:submenu icon="pi pi-file" 
+				label="Cadastrar">
+					<p:menuitem outcome="cliente" 
+					value="Cliente" />
+				</p:submenu>
+	
+				<p:submenu icon="pi pi-list" label="Listar">
+					<p:menuitem outcome="clientes" 
+					value="Clientes" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+
+		<h:form id="form">
+
+			<h1>#{clienteControlador.cliente.id == null ? 'Cadastrar' : 'Editar'} cliente</h1>
+
+			<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
+				<p:outputLabel for="cliente-id" value="Id" />
+				<p:inputText id="cliente-id"
+					value="#{clienteControlador.cliente.id}" required="true"
+					requiredMessage="Campo 'Id' é obrigatório" />
+				<p:message for="cliente-id" />
+			</div>
+
+			<div class="ui-g-4 ui-lg-4 ui-md-8 ui-sm-12">
+				<p:outputLabel for="cliente-nome" value="Nome" />
+				<p:inputText id="cliente-nome"
+					value="#{clienteControlador.cliente.nome}" required="true"
+					requiredMessage="Campo 'Nome' é obrigatório" />
+				<p:message for="cliente-nome" />
+			</div>
+
+
+			<div class="ui-g-12 ui-g-nopad">
+				<div class="ui-g-4 ui-lg-4 ui-md-12 ui-sm-12">
+					<p:outputLabel for="cliente-logradouro" value="Logradouro" />
+					<p:inputText id="cliente-logradouro"
+						value="#{clienteControlador.cliente.logradouro}" required="true"
+						requiredMessage="Campo 'Logradouro' é obrigatório" />
+					<p:message for="cliente-logradouro" />
+				</div>
+
+				<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+					<p:outputLabel for="cliente-bairro" value="Bairro" />
+					<p:inputText id="cliente-bairro"
+						value="#{clienteControlador.cliente.bairro}" required="true"
+						requiredMessage="Campo 'Bairro' é obrigatório" />
+					<p:message for="cliente-bairro" />
+				</div>
+
+				<div class="ui-g-4 ui-lg-4 ui-md-6 ui-sm-12">
+					<p:outputLabel for="cliente-estado" value="Estado" />
+					<p:selectOneMenu id="cliente-estado"
+						value="#{clienteControlador.cliente.estado}" required="true"
+						requiredMessage="Campo 'Estado' é obrigatório">
+						<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
+						<f:selectItems value="#{clienteControlador.estados()}" var="e"
+							itemLabel="#{e}" itemValue="#{e}" />
+					</p:selectOneMenu>
+					<p:message for="cliente-estado" />
+				</div>
+			</div>
+
+			<div class="ui-g-2 ui-lg-2 ui-md-4 ui-sm-12">
+				<p:commandButton rendered="#{clienteControlador.cliente.id == null}"
+					action="#{clienteControlador.cadastrar()}" value="Cadastrar"
+					update="form" 
+					icon="pi pi-save"/>
+
+				<p:commandButton rendered="#{clienteControlador.cliente.id != null}"
+					action="#{clienteControlador.editar()}" value="Editar"
+					update="form" 
+					icon="pi pi-pencil"/>
+			</div>
+
+		</h:form>
+	</div>
+
+</h:body>
+</html>

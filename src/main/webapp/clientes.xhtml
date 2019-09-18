@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PPW</title>
+</h:head>
+
+<h:body>
+
+	<h:form id="menu">
+		<p:menubar>
+			<p:submenu icon="pi pi-file" 
+			label="Cadastrar">
+				<p:menuitem outcome="cliente" 
+				value="Cliente" />
+			</p:submenu>
+
+			<p:submenu icon="pi pi-list" label="Listar">
+				<p:menuitem outcome="clientes" 
+				value="Clientes" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+	<h:form id="tabela">
+
+		<p:dataTable var="c" value="#{clienteControlador.clientes()}"
+			rowHover="true" sortBy="#{c.nome}">
+
+			<f:facet name="header">
+				<h2>Lista de clientes</h2>
+			</f:facet>
+
+			<p:column headerText="$">
+				#{c.id}
+			</p:column>
+
+			<p:column headerText="Nome">
+				#{c.nome}
+			</p:column>
+
+			<p:column headerText="Logradouro">
+				#{c.logradouro}
+			</p:column>
+
+			<p:column headerText="Bairro">
+				#{c.bairro}
+			</p:column>
+
+			<p:column headerText="Estado">
+				#{c.estado}
+			</p:column>
+
+			<p:column headerText="Ações">
+				<p:button value="Editar" immediate="true" 
+					icon="pi pi-pencil" outcome="cliente">
+					<f:param name="id" value="#{c.id}"/>
+				</p:button>
+
+				<p:commandButton action="#{clienteControlador.excluir()}"
+					value="Excluir" immediate="true" update="tabela" icon="pi pi-trash">
+
+					<f:setPropertyActionListener value="#{c}"
+						target="#{clienteControlador.cliente}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+
+	</h:form>
+
+</h:body>
+</html>

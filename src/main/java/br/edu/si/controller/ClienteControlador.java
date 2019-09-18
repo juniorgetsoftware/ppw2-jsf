@@ -1,16 +1,30 @@
 package br.edu.si.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.edu.si.model.Cliente;
 
-@ManagedBean(name = "meuControlador")
+@ManagedBean
 @ViewScoped
-public class MeuControlador {
+public class ClienteControlador implements Serializable {
+
+	@PostConstruct
+	public void init() {
+		String idString = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+		if (idString != null) {
+			Long id = Long.parseLong(idString);
+			int index = clientes.indexOf(new Cliente(id));
+			cliente = clientes.get(index);
+		}
+	}
 
 	private Cliente cliente = new Cliente();
 	private static List<Cliente> clientes = new ArrayList<>();
@@ -41,10 +55,11 @@ public class MeuControlador {
 		cliente = new Cliente();
 	}
 
-	public void editar() {
+	public String editar() {
 		int index = clientes.indexOf(cliente);
 		clientes.set(index, cliente);
 		cliente = new Cliente();
+		return "clientes?faces-redirect=true";
 	}
 
 }

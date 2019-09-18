@@ -8,6 +8,14 @@ public class Cliente {
 	private String bairro;
 	private String estado;
 
+	public Cliente() {
+
+	}
+
+	public Cliente(Long id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
