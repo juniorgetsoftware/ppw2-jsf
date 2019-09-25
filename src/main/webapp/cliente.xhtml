@@ -7,30 +7,40 @@
 
 <h:head>
 	<title>PPW</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="app.js" />
 </h:head>
+
+<f:metadata>
+	<f:viewParam name="id" value="#{clienteControlador.idCliente}" />
+	<f:event listener="#{clienteControlador.prepararParaEditar()}"
+		type="preRenderView"></f:event>
+</f:metadata>
 
 <h:body>
 
 	<div class="ui-fluid">
-	
+
 		<h:form id="menu">
 			<p:menubar>
-				<p:submenu icon="pi pi-file" 
-				label="Cadastrar">
-					<p:menuitem outcome="cliente" 
-					value="Cliente" />
+				<p:submenu icon="pi pi-file" label="Cadastrar">
+					<p:menuitem outcome="cliente" value="Cliente" />
 				</p:submenu>
-	
+
 				<p:submenu icon="pi pi-list" label="Listar">
-					<p:menuitem outcome="clientes" 
-					value="Clientes" />
+					<p:menuitem outcome="clientes" value="Clientes" />
 				</p:submenu>
 			</p:menubar>
 		</h:form>
 
+		<div class="ui-g-12">
+			<p:growl id="msg" life="4000" showDetail="true" />
+		</div>
+
 		<h:form id="form">
 
-			<h1>#{clienteControlador.cliente.id == null ? 'Cadastrar' : 'Editar'} cliente</h1>
+			<h1>#{clienteControlador.cliente.id == null ? 'Cadastrar' :
+				'Editar'} cliente</h1>
 
 			<div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12">
 				<p:outputLabel for="cliente-id" value="Id" />
@@ -82,13 +92,11 @@
 			<div class="ui-g-2 ui-lg-2 ui-md-4 ui-sm-12">
 				<p:commandButton rendered="#{clienteControlador.cliente.id == null}"
 					action="#{clienteControlador.cadastrar()}" value="Cadastrar"
-					update="form" 
-					icon="pi pi-save"/>
+					update="form" icon="pi pi-save" />
 
 				<p:commandButton rendered="#{clienteControlador.cliente.id != null}"
 					action="#{clienteControlador.editar()}" value="Editar"
-					update="form" 
-					icon="pi pi-pencil"/>
+					update="form" icon="pi pi-pencil" />
 			</div>
 
 		</h:form>
